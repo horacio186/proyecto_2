@@ -1,13 +1,17 @@
 package com.veterinaria.veterinaria_usuario.infraestructure.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "usuario")
 public class UserDAO {

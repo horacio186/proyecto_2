@@ -1,6 +1,7 @@
 package com.veterinaria.veterinaria_usuario.infraestructure.adapters.in;
 
 import com.veterinaria.veterinaria_usuario.application.domain.entity.User;
+import com.veterinaria.veterinaria_usuario.application.services.user.GetUserByIdService;
 import com.veterinaria.veterinaria_usuario.application.services.user.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -18,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private GetUserByIdService getById;
 
     @GetMapping("/all")
     @ApiOperation(value = "Obtener todos los usuarios ")
@@ -34,9 +39,8 @@ public class UserController {
             @ApiResponse(code = 200,message = "OK"),
             @ApiResponse(code = 404,message = "NOT FOUND")
     })
-    public ResponseEntity<User> findById(@PathVariable("id") int id) throws Exception{
-        return service.findById(id).map(td -> new ResponseEntity<>(td,HttpStatus.OK)).
-                orElse(new ResponseEntity<>(null,HttpStatus.NOT_FOUND));
+    public ResponseEntity<Optional<User>> getById(@PathVariable int id) {
+        return new ResponseEntity<>(getById.execute(id), HttpStatus.OK);
     }
 
 

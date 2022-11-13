@@ -31,14 +31,22 @@ public class MascotaRepository implements MascotaGateways {
     @Override
     public Optional<Mascota> findByIdNombre(String id) {
 
-        return crudRepository.findByIdNombre(id);
+        MascotaDAO mascotaDAO = crudRepository.findById(id).get();
+        return Optional.ofNullable(mapper.toMascota(mascotaDAO));
     }
 
+    @Override
+    public List<Mascota> findByIdNombreOrRaza(String nombre, String raza) {
+        List<MascotaDAO> mascotasDAO = crudRepository.findByIdNombreOrRaza(nombre, raza);
+        return (mapper.toMascotas(mascotasDAO));
+    }
 
     @Override
     public Mascota saveMascota(Mascota mascota) {
-        MascotaDAO dao = mapper.toMascotaDAO(mascota);
-        return mapper.toMascota(crudRepository.save(dao));
+      //  MascotaDAO dao = mapper.toMascotaDAO(mascota);
+       // return mapper.toMascota(crudRepository.save(dao));
+        MascotaDAO mascotaDAO = crudRepository.save(mapper.toMascotaDAO(mascota));
+        return mapper.toMascota(mascotaDAO);
     }
 
     @Override

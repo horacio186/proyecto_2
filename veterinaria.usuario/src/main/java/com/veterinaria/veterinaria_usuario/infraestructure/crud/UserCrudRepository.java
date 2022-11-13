@@ -13,7 +13,8 @@ import java.util.Optional;
 public interface UserCrudRepository extends CrudRepository<UserDAO,Integer> {
 
 
-    Optional<User> findById(int id);
+    //Optional<User> findById(int id);
+   // Optional<User> getUsuarioById(int id);
 
     @Query(value = "select * from usuario u join mascota m on u.id_usuario = m.id_usuario where tratamiento = :tratamiento", nativeQuery=true)
     Optional<List<UserDAO>>  findByIdUserAndTratamiento(String tratamiento);

@@ -29,8 +29,10 @@ public class UserRepository implements UserGateways {
     }
 
    @Override
-    public Optional<User> findById(int id) {
-        return crudRepository.findById(id);
+    public Optional<User> getByIdUsuario(int id) {
+
+       UserDAO userDAO = crudRepository.findById(id).get();
+       return Optional.ofNullable(mapper.toUser(userDAO));
     }
 
 

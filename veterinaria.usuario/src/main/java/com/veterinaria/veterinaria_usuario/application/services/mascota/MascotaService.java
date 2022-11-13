@@ -5,9 +5,11 @@ import com.veterinaria.veterinaria_usuario.application.ports.out.mascota.Mascota
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class MascotaService {
 
@@ -18,9 +20,6 @@ public class MascotaService {
         return gateway.getAll();
     }
 
-    public Optional<Mascota> findByIdNombre(String id ) {
-        return gateway.findByIdNombre(id);
-    }
 
     public Optional<List<Mascota>> findByIdMascotaAndTratamiento(String tratamiento, String id) {
 

@@ -12,6 +12,8 @@ public interface MascotaGateways {
 
     Optional<Mascota> findByIdNombre(String id);
 
+    List<Mascota> findByIdNombreOrRaza(String nombre, String raza);
+
     Mascota saveMascota(Mascota mascota);
 
     void deleteMascota(String id);

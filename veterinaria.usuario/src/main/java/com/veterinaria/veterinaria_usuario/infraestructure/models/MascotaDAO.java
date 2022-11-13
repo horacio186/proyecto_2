@@ -1,12 +1,17 @@
 package com.veterinaria.veterinaria_usuario.infraestructure.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.util.Objects;
 
+@Transactional
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "mascota")
 public class MascotaDAO {
@@ -24,7 +29,7 @@ public class MascotaDAO {
     @Column(name = "id_usuario")
     private int idUsuario;
 
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario",insertable = false,updatable = false, foreignKey = @ForeignKey(name = "FK_usuario_mascota"))
     private UserDAO user;
 

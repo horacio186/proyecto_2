@@ -12,6 +12,8 @@ public interface MascotaCrudRepository extends CrudRepository<MascotaDAO,String>
 
     Optional<Mascota> findByIdNombre(String id);
 
+    List<MascotaDAO> findByIdNombreOrRaza(String nombre, String raza);
+
     @Query(value = "select * from mascota where tratamiento = :tratamiento", nativeQuery=true)
     Optional<List<MascotaDAO>>  findByIdMascotaAndTratamiento(String tratamiento);
 }
